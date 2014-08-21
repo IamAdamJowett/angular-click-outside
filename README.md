@@ -10,12 +10,16 @@ To use this directive, ensure the element you want to close has an id (not class
 An example:
     
     <button id="my-button">Menu Trigger Button</button>
-    <div class="menu" id="main-menu" click-outside outside-if-not="my-button, main-menu">Hide me if click outside but not on button</div>
+    <div class="menu" id="main-menu" click-outside outside-if-not="my-button">
+        ...
+    </div>
     
 You can also assign a callback function by adding it to the `click-outside` attribute:
 
     <button id="my-button">Menu Trigger Button</button>
-    <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button, main-menu">Hide me if click outside but not on button</div>
+    <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button">
+        ...
+    </div>
     
 Where `closeThis()` is the function assigned to the scope via the controller such as:
 
@@ -31,5 +35,7 @@ Where `closeThis()` is the function assigned to the scope via the controller suc
     
     <button id="my-button">Menu Trigger Button</button>
     <div ng-controller="MenuController">
-        <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button, main-menu">Hide me if click outside but not on button</div>
+        <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button">
+            ...
+        </div>
     </div>
