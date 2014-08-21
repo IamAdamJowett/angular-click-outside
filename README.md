@@ -5,9 +5,15 @@ An angular directive to detect a click outside of an elements scope. Great for c
 
 ###Usage
 
-To use this directive, ensure the element you want to close has an id (not class) assigned (id's are needed as multiple elements may have the same class). Add the directive via the `click-outside` attribute, and give exceptions via the `outside-if-not` attribute.
+To use this directive, ensure the element you want to close has an id (not class) assigned. Id's are needed as multiple elements may have the same class. Add the directive via the `click-outside` attribute, and give exceptions via the `outside-if-not` attribute.
 
-An example:
+Basic example:
+    
+    <div class="menu" id="main-menu" click-outside>
+        ...
+    </div>
+    
+With exceptions example:
     
     <button id="my-button">Menu Trigger Button</button>
     <div class="menu" id="main-menu" click-outside outside-if-not="my-button">
