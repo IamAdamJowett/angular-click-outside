@@ -1,5 +1,5 @@
 angular
-    .module('clickOutside', [])
+    .module('pcApp')
     .directive('clickOutside', ['$document', clickOutside]);
 
 function clickOutside($document) {
@@ -10,7 +10,7 @@ function clickOutside($document) {
         },
         link: function ($scope, elem, attr) {
             var classList = attr.outsideIfNot.replace(', ', ',').split(',');
-
+            if (attr.id !== undefined) classList.push(attr.id);
 
             $document.on('click', function (e) {
                 var i = 0,
@@ -19,10 +19,11 @@ function clickOutside($document) {
                 if (!e.target) return;
 
                 for (element = e.target; element; element = element.parentNode) {
-                    var classNames = element.className;
-                    if (classNames !== undefined) {
+                    var id = element.id;
+
+                    if (id !== undefined) {
                         for (i = 0; i < classList.length; i++) {
-                            if (classNames.indexOf(classList[i]) > -1) {
+                            if (id.indexOf(classList[i]) > -1) {
                                 return;
                             }
                         }
