@@ -9,7 +9,7 @@ function clickOutside($document) {
             clickOutside: '&'
         },
         link: function ($scope, elem, attr) {
-            var classList = attr.outsideIfNot.replace(', ', ',').split(',');
+            var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [];
             if (attr.id !== undefined) classList.push(attr.id);
 
             $document.on('click', function (e) {
