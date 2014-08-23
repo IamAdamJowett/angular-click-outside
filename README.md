@@ -9,24 +9,16 @@ To use this directive, ensure the element you want to detect a close outside of 
 
 Basic example:
     
-    <div class="menu" id="main-menu" click-outside>
+    <div class="menu" id="main-menu" click-outside="closeThis">
         ...
     </div>
     
-With exceptions example:
-    
-    <button id="my-button">Menu Trigger Button</button>
-    <div class="menu" id="main-menu" click-outside outside-if-not="my-button">
+This is of little use though without a callback function to do something with that click:
+	
+    <div class="menu" id="main-menu" click-outside="closeThis()">
         ...
     </div>
-    
-You can also assign a callback function by adding it to the `click-outside` attribute:
-
-    <button id="my-button">Menu Trigger Button</button>
-    <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button">
-        ...
-    </div>
-    
+	
 Where `closeThis()` is the function assigned to the scope via the controller such as:
 
     angular
@@ -45,3 +37,18 @@ Where `closeThis()` is the function assigned to the scope via the controller suc
             ...
         </div>
     </div>
+
+###Adding Exceptions
+You can also add exceptions via the `outside-if-not tag`, which executes the callback function, but only if the id's listed wasn't clicked. In this case `closeThis()` will be called only if clicked outside _and_ #my-button wasn't clicked as well. This can be great for things like slide in menus that might have a button outside of the menu scope that triggers it:
+    
+    <button id="my-button">Menu Trigger Button</button>
+    <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button">
+        ...
+    </div>
+	
+You can have more than one exception by comma delimiting a list such as:
+	<button id="my-button">Menu Trigger Button</button>
+    <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button, another-button">
+        ...
+    </div>
+	<button id="another-button">A second trigger button</button>
