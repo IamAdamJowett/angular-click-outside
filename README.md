@@ -47,6 +47,7 @@ You can also add exceptions via the `outside-if-not tag`, which executes the cal
     </div>
 	
 You can have more than one exception by comma delimiting a list such as:
+
 	<button id="my-button">Menu Trigger Button</button>
     <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button, another-button">
         ...
