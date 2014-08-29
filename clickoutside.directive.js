@@ -20,10 +20,11 @@ function clickOutside($document) {
 
                 for (element = e.target; element; element = element.parentNode) {
                     var id = element.id;
+                    var classNames = element.className;
 
                     if (id !== undefined) {
                         for (i = 0; i < classList.length; i++) {
-                            if (id.indexOf(classList[i]) > -1) {
+                            if (id.indexOf(classList[i]) > -1 || classNames.indexOf(classList[i]) > -1) {
                                 return;
                             }
                         }
@@ -33,5 +34,5 @@ function clickOutside($document) {
                 $scope.$eval($scope.clickOutside);
             });
         }
-    }
+    };
 }
