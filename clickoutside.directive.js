@@ -1,5 +1,5 @@
 angular
-    .module('pcApp')
+    .module('mouse.utils', [])
     .directive('clickOutside', ['$document', clickOutside]);
 
 function clickOutside($document) {
