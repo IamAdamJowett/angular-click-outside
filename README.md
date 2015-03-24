@@ -3,6 +3,11 @@ angular-click-outside
 
 An angular directive to detect a click outside of an elements scope. Great for closing dialogues, drawers and off screen menu's etc.
 
+###Installation
+__Bower__
+
+    bower install angular-click-outside --save
+
 ###Usage
 __To use this directive, ensure the element you want to detect a close outside of has an id__. 
 
