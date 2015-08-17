@@ -18,7 +18,7 @@
                 }
 
                 // assign the document click handler to a variable so we can un-register it when the directive is destroyed
-                var clickHandler = $document.on('click', function(e) {
+                $document.on('click', function(e) {
                     var i = 0,
                         element;
 
@@ -36,7 +36,7 @@
                         // loop through the elements id's and classnames looking for exceptions
                         for (i = 0; i < l; i++) {
                             // check for id's or classes, but only if they exist in the first place
-                            if ((id !== undefined && id.indexOf(classList[i]) > -1) || (classNames.length && classNames.indexOf(classList[i]) > -1)) {
+                            if ((id !== undefined && id.indexOf(classList[i]) > -1) || (classNames && classNames.indexOf(classList[i]) > -1)) {
                                 // now let's exit out as it is an element that has been defined as being ignored for clicking outside
                                 return;
                             }
@@ -51,7 +51,7 @@
 
                 // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
                 $scope.$on('$destroy', function() {
-                    clickHandler();
+                    $document.off('click');
                 });
             }
         };
