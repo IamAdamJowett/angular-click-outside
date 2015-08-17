@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('mouse.utils', [])
+        .module('angular-click-outside', [])
         .directive('clickOutside', ['$document', '$parse', clickOutside]);
 
     function clickOutside($document, $parse) {
