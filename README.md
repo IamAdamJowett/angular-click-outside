@@ -14,6 +14,20 @@ __Bower__
 
     bower install angular-click-outside --save
 
+## Installation
+
+There are two easy ways to install the Coms service:
+
+#### Manual download
+
+Download the `clickoutside.directive.js` file, and include it in your index.html file with something like:
+
+    <script type="text/javascript" src="/path/to/clickoutside.directive.js"></script>
+
+Also be sure to include the module in your app.js file with:
+
+    angular.module('yourAppName', ['angular-click-outside'])
+
 ###Usage
 __To use this directive, ensure the element you want to detect a close outside of has an id__.
 
