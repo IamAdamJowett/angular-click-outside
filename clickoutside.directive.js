@@ -3,16 +3,14 @@
 
     angular
         .module('mouse.utils', [])
-        .directive('clickOutside', ['$document', clickOutside]);
+        .directive('clickOutside', ['$document', '$parse', clickOutside]);
 
-    function clickOutside($document) {
+    function clickOutside($document, $parse) {
         return {
             restrict: 'A',
-            scope: {
-                clickOutside: '&'
-            },
             link: function($scope, elem, attr) {
-                var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [];
+                var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
+                    fn = $parse(attr['clickOutside']);
 
                 // add the elements id so it is not counted in the click listening
                 if (attr.id !== undefined) {
@@ -46,7 +44,9 @@
                     }
 
                     // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
-                    $scope.$eval($scope.clickOutside);
+                    return $scope.$apply(function () {
+                        return fn($scope);
+                    });
                 });
 
                 // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
