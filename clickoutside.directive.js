@@ -1,55 +1,59 @@
-angular
-    .module('mouse.utils', [])
-    .directive('clickOutside', ['$document', clickOutside]);
+(function() {
+    'use strict';
 
-function clickOutside($document) {
-    return {
-        restrict: 'A',
-        scope: {
-            clickOutside: '&'
-        },
-        link: function($scope, elem, attr) {
-            var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [];
+    angular
+        .module('mouse.utils', [])
+        .directive('clickOutside', ['$document', clickOutside]);
 
-            // add the elements id so it is not counted in the click listening
-            if (attr.id !== undefined) {
-                classList.push(attr.id);
-            }
+    function clickOutside($document) {
+        return {
+            restrict: 'A',
+            scope: {
+                clickOutside: '&'
+            },
+            link: function($scope, elem, attr) {
+                var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [];
 
-            // assign the document click handler to a variable so we can un-register it when the directive is destroyed
-            var clickHandler = $document.on('click', function(e) {
-                var i = 0,
-                    element;
-
-                // if there is no click target, no point going on
-                if (!e || !e.target) {
-                    return;
+                // add the elements id so it is not counted in the click listening
+                if (attr.id !== undefined) {
+                    classList.push(attr.id);
                 }
 
-                // loop through the available elements, looking for classes in the class list that might match and so will eat
-                for (element = e.target; element; element = element.parentNode) {
-                    var id = element.id,
-                        classNames = element.className,
-                        l = classList.length;
+                // assign the document click handler to a variable so we can un-register it when the directive is destroyed
+                var clickHandler = $document.on('click', function(e) {
+                    var i = 0,
+                        element;
 
-                    // loop through the elements id's and classnames looking for exceptions
-                    for (i = 0; i < l; i++) {
-                        // check for id's or classes, but only if they exist in the first place
-                        if ((id !== undefined && id.indexOf(classList[i]) > -1) || (classNames.length && classNames.indexOf(classList[i]) > -1)) {
-                            // now let's exit out as it is an element that has been defined as being ignored for clicking outside
-                            return;
+                    // if there is no click target, no point going on
+                    if (!e || !e.target) {
+                        return;
+                    }
+
+                    // loop through the available elements, looking for classes in the class list that might match and so will eat
+                    for (element = e.target; element; element = element.parentNode) {
+                        var id = element.id,
+                            classNames = element.className,
+                            l = classList.length;
+
+                        // loop through the elements id's and classnames looking for exceptions
+                        for (i = 0; i < l; i++) {
+                            // check for id's or classes, but only if they exist in the first place
+                            if ((id !== undefined && id.indexOf(classList[i]) > -1) || (classNames.length && classNames.indexOf(classList[i]) > -1)) {
+                                // now let's exit out as it is an element that has been defined as being ignored for clicking outside
+                                return;
+                            }
                         }
                     }
-                }
 
-                // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
-                $scope.$eval($scope.clickOutside);
-            });
+                    // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
+                    $scope.$eval($scope.clickOutside);
+                });
 
-            // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
-            $scope.$on('$destroy', function() {
-                clickHandler();
-            });
-        }
-    };
-}
+                // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
+                $scope.$on('$destroy', function() {
+                    clickHandler();
+                });
+            }
+        };
+    }
+})();
