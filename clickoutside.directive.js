@@ -17,8 +17,7 @@
                     classList.push(attr.id);
                 }
 
-                // assign the document click handler to a variable so we can un-register it when the directive is destroyed
-                $document.on('click.outsideDirective', function(e) {
+                var eventHandler = function(e) {
 
                     //check if our element already hiden
                     if(angular.element(elem).hasClass("ng-hide")){
@@ -53,11 +52,14 @@
                     return $scope.$apply(function () {
                         return fn($scope);
                     });
-                });
+                };
+
+                // assign the document click handler to a variable so we can un-register it when the directive is destroyed
+                $document.on('click', eventHandler);
 
                 // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
                 $scope.$on('$destroy', function() {
-                    $document.off('click.outsideDirective');
+                    $document.off('click', eventHandler);
                 });
             }
         };
