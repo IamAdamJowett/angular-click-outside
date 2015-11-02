@@ -38,6 +38,11 @@
                             classNames = element.className,
                             l = classList.length;
 
+                        // Unwrap SVGAnimatedString
+                        if (classNames && classNames.baseVal !== undefined) {
+                          classNames = classNames.baseVal;
+                        }
+
                         // loop through the elements id's and classnames looking for exceptions
                         for (i = 0; i < l; i++) {
                             // check for id's or classes, but only if they exist in the first place
