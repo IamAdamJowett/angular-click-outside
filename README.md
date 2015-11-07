@@ -5,16 +5,12 @@ An angular directive to detect a click outside of an elements scope. Great for c
 
 ###Recent changes
 
+- Added support for SVG elements thanks to @holm
 - Removed isolated scope as per @elado suggestion so it can be added to element already calling for isolated scope
 - Now deregistering document click listener when routing away from within the callback passed to the directive
 - Added in-code documentation, and removed the check for id roadblock in loop of elements
 
 ###Installation
-__Bower__
-
-    bower install angular-click-outside --save
-
-## Installation
 
 There are two easy ways to install the Coms service:
 
@@ -27,6 +23,10 @@ Download the `clickoutside.directive.js` file, and include it in your index.html
 Also be sure to include the module in your app.js file with:
 
     angular.module('yourAppName', ['angular-click-outside'])
+
+####Bower
+
+    bower install angular-click-outside --save
 
 ###Usage
 __To use this directive, ensure the element you want to detect a close outside of has an id__.
@@ -67,9 +67,9 @@ Where `closeThis()` is the function assigned to the scope via the controller suc
     </div>
 
 ###Adding Exceptions
-You can also add exceptions via the `outside-if-not` tag, which executes the callback function, but only if the id's listed wasn't clicked.
+You can also add exceptions via the `outside-if-not` tag, which executes the callback function, but only if the id's or classes listed aren't clicked.
 
-In this case `closeThis()` will be called only if clicked outside _and_ #my-button wasn't clicked as well. This can be great for things like slide in menus that might have a button outside of the menu scope that triggers it:
+In this case `closeThis()` will be called only if clicked outside _and_ #my-button wasn't clicked as well (note .my-button also would be an exception). This can be great for things like slide in menus that might have a button outside of the menu scope that triggers it:
 
     <button id="my-button">Menu Trigger Button</button>
     <div class="menu" id="main-menu" click-outside="closeThis()" outside-if-not="my-button">
