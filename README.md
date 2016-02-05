@@ -12,7 +12,7 @@ An angular directive to detect a click outside of an elements scope. Great for c
 
 ###Installation
 
-There are two easy ways to install the Coms service:
+There are two easy ways to install the clickoutside directive:
 
 #### Manual download
 
