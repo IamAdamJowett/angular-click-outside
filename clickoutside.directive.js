@@ -12,7 +12,7 @@
             restrict: 'A',
             link: function($scope, elem, attr) {
                 var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
-                    fn = $parse(attr['clickOutside']);
+                    fn;
 
                 // add the elements id so it is not counted in the click listening
                 if (attr.id !== undefined) {
@@ -54,9 +54,10 @@
                             }
                         }
                     }
-
+                    
                     // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
                     return $scope.$apply(function () {
+                        fn = $parse(attr['clickOutside'])
                         return fn($scope);
                     });
                 };
