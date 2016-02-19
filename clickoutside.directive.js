@@ -42,11 +42,11 @@
                         if (classNames && classNames.baseVal !== undefined) {
                           classNames = classNames.baseVal;
                         }
-
+                        
                         // loop through the elements id's and classnames looking for exceptions
                         for (i = 0; i < l; i++) {
                             // check for id's or classes, but only if they exist in the first place
-                            if ((id !== undefined && id.indexOf(classList[i]) > -1) || (classNames && classNames.indexOf(classList[i]) > -1)) {
+                            if ((id !== undefined && id === classList[i]) || (classNames && classNames === classList[i])) {
                                 // now let's exit out as it is an element that has been defined as being ignored for clicking outside
                                 return;
                             }
