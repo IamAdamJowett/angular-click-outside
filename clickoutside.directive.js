@@ -21,8 +21,8 @@
 
                 var eventHandler = function(e) {
 
-                    //check if our element already hiden
-                    if(angular.element(elem).hasClass("ng-hide")){
+                    //check if our element already hidden
+                    if (angular.element(elem).hasClass("ng-hide")) {
                         return;
                     }
 
@@ -42,9 +42,9 @@
 
                         // Unwrap SVGAnimatedString
                         if (classNames && classNames.baseVal !== undefined) {
-                          classNames = classNames.baseVal;
+                            classNames = classNames.baseVal;
                         }
-                        
+
                         // loop through the elements id's and classnames looking for exceptions
                         for (i = 0; i < l; i++) {
                             // check for id's or classes, but only if they exist in the first place
@@ -54,10 +54,10 @@
                             }
                         }
                     }
-                    
+
                     // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
-                    return $scope.$apply(function () {
-                        fn = $parse(attr['clickOutside'])
+                    return $scope.$apply(function() {
+                        fn = $parse(attr['clickOutside']);
                         return fn($scope);
                     });
                 };
