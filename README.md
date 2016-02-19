@@ -31,7 +31,11 @@ Also be sure to include the module in your app.js file with:
 ###Usage
 __To use this directive, ensure the element you want to detect a close outside of has an id__.
 
-Be wary of using classes as some unwanted elements may have the same class. General ID's will suffice, but instances of dynamically inserted list items may require the use of classes.
+The directive will work with either id's or classes, however be wary of using classes as quite often some unwanted elements may have the same class, and so will be excluded/included unintentionally. 
+
+If you are sure that you want to exclude/include all elements with a class however the directive will work just fine as it looks through the classNames as well as looking at the given id list.
+
+General though ID's will suffice, but instances of dynamically inserted list items may require the use of classes.
 
 Add the directive via the `click-outside` attribute, and give exceptions via the `outside-if-not` attribute.
 
