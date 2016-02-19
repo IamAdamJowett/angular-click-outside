@@ -1,0 +1,21 @@
+# Sublime Text IDE
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+sftp-config.json
+
+# MISC
+.DS_Store
+Thumbs.db
+_notes
+/*.lnk
+/bower_components
+/node_modules
+
+# Binaries
+*.exe
+*.app
+*.rar
+*.zip
