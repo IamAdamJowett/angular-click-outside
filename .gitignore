@@ -16,6 +16,9 @@
 *.sublime-project
 sftp-config.json
 
+# angular-seed
+/angular-seed
+
 # MISC
 /vendor
 composer.phar
