@@ -10,7 +10,7 @@
     function clickOutside($document, $parse) {
         return {
             restrict: 'A',
-            link: function($scope, elem, attr) {
+            compile: function($scope, elem, attr) {
                 var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
                     fn;
 
@@ -18,10 +18,10 @@
                 if (attr.id !== undefined) {
                     classList.push(attr.id);
                 }
+                
+                function eventHandler(e) {
 
-                var eventHandler = function(e) {
-
-                    //check if our element already hidden
+                    // check if our element already hidden and abort if so
                     if (angular.element(elem).hasClass("ng-hide")) {
                         return;
                     }
@@ -60,7 +60,7 @@
                         fn = $parse(attr['clickOutside']);
                         return fn($scope);
                     });
-                };
+                }
 
                 // assign the document click handler to a variable so we can un-register it when the directive is destroyed
                 $document.on('click', eventHandler);
