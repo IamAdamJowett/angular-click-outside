@@ -10,7 +10,7 @@
     function clickOutside($document, $parse) {
         return {
             restrict: 'A',
-            compile: function($scope, elem, attr) {
+            link: function($scope, elem, attr) {
                 var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
                     fn;
 
@@ -18,7 +18,7 @@
                 if (attr.id !== undefined) {
                     classList.push(attr.id);
                 }
-                
+
                 function eventHandler(e) {
 
                     // check if our element already hidden and abort if so
@@ -62,13 +62,23 @@
                     });
                 }
 
+                // detect if touch device and listen to touchstart instead of click
+                var ua = navigator.userAgent,
+                    event = (hasTouch()) ? "touchstart" : "click";
+
                 // assign the document click handler to a variable so we can un-register it when the directive is destroyed
-                $document.on('click', eventHandler);
+                $document.on(event, eventHandler);
 
                 // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
                 $scope.$on('$destroy', function() {
                     $document.off('click', eventHandler);
                 });
+                
+                // attempt to figure out if we are on a touch device
+                function hasTouch() {
+                    // works on most browsers, IE10/11 and Surface
+                    return 'ontouchstart' in window || navigator.maxTouchPoints;
+                };
             }
         };
     }
