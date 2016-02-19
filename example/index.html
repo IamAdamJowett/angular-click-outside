@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="exampleApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Example App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div ng-view>
+        <div ng-controller="AppController">
+            <button id="menu-button" click-outside="closeThis()" outside-if-not="my-button">Menu Button</button>
+            <button id="my-button">My Button</button>
+        </div>
+    </div>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="bower_components/angular-click-outside/clickoutside.directive.js"></script>
+    <script src="js/controllers/app.controller.js"></script>
+</body>
+
+</html>
