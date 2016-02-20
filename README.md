@@ -23,6 +23,10 @@ Download the `clickoutside.directive.js` file, and include it in your index.html
 Also be sure to include the module in your app.js file with:
 
     angular.module('yourAppName', ['angular-click-outside'])
+    
+####npm
+
+    npm install @iamadamjowett/angular-click-outside
 
 ####Bower
 
