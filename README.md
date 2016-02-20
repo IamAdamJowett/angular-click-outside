@@ -1,5 +1,4 @@
-angular-click-outside
-=====================
+#angular-click-outside
 
 An angular directive to detect a click outside of an elements scope. Great for closing dialogues, drawers and off screen menu's etc.
 
