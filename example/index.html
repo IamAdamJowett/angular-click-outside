@@ -13,7 +13,7 @@
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <button id="menu-button" click-outside="closeThis()" outside-if-not="exclusion-zone">Menu Button</button>
+            <button id="menu-button" click-outside="closeThis()" outside-if-not="exclusion-zone">Button</button>
             <div class="spacer">&nbsp;</div>
             <div id="exclusion-zone">Click outsides will be ignored in here</div>
             <div class="spacer">&nbsp;</div>
@@ -33,7 +33,7 @@
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="app.js"></script>
-    <script src="bower_components/angular-click-outside/clickoutside.directive.js"></script>
+    <script src="../clickoutside.directive.js"></script>
     <script src="js/controllers/app.controller.js"></script>
 </body>
 
