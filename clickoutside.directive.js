@@ -12,7 +12,8 @@
             restrict: 'A',
             link: function($scope, elem, attr) {
                 var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
-                    fn;
+                    fn,
+                    event;
 
                 // add the elements id so it is not counted in the click listening
                 if (attr.id !== undefined) {
@@ -63,10 +64,9 @@
                 }
 
                 // detect if touch device and listen to touchstart instead of click
-                var ua = navigator.userAgent,
-                    event = (hasTouch()) ? "touchstart" : "click";
+                event = (_hasTouch()) ? "touchstart" : "click";
 
-                // assign the document click handler to a variable so we can un-register it when the directive is destroyed
+                // listen for click or touchstart depending on the device and handle the event
                 $document.on(event, eventHandler);
 
                 // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
@@ -74,8 +74,8 @@
                     $document.off('click', eventHandler);
                 });
                 
-                // attempt to figure out if we are on a touch device
-                function hasTouch() {
+                // private function to attempt to figure out if we are on a touch device
+                function _hasTouch() {
                     // works on most browsers, IE10/11 and Surface
                     return 'ontouchstart' in window || navigator.maxTouchPoints;
                 };
