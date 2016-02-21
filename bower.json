@@ -1,6 +1,6 @@
 {
     "name": "angular-click-outside",
-    "version": "2.4.5",
+    "version": "2.4.6",
     "main": "clickoutside.directive.js",
     "homepage": "https://github.com/IamAdamJowett/angular-click-outside",
     "authors": [
