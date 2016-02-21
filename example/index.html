@@ -13,11 +13,7 @@
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <button id="menu-button" click-outside="closeThis()" outside-if-not="exclusion-zone">Button</button>
-            <div class="spacer">&nbsp;</div>
-            <div id="exclusion-zone">Click outsides will be ignored in here</div>
-            <div class="spacer">&nbsp;</div>
-            <li id="dropdown-menu" click-outside="showDropdown = false" outside-if-not="exclusion-zone">
+            <li id="dropdown-menu" click-outside="showDropdown = false" outside-if-not="exclusion-zone, menu-button">
                 <a href="#" ng-click="showDropdown = true">Show menu</a>
                 <div ng-show="showDropdown">
                     <ul id="submenu">
@@ -27,7 +23,9 @@
                 </div>
             </li>
             <div class="spacer">&nbsp;</div>
-            <div>{{feedback}}</div>
+            <div id="exclusion-zone">Click outsides will be ignored in here</div>
+            <div class="spacer">&nbsp;</div>
+            <button id="menu-button" click-outside="closeThis()">Button is excluded as well</button>
         </div>
     </div>
 
