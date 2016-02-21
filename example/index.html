@@ -7,23 +7,27 @@
     <title>Example App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/styles.css" type="text/css" />
 </head>
 
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <button id="menu-button" click-outside="closeThis()" outside-if-not="my-button">Menu Button</button>
-            <button id="my-button">My Button</button>
-            <div stlye="height: 10px">&nbsp;</div>
-            <li id="something-in-menu" click-outside="showDropdown = false">
-                <a href="#" ng-click="showDropdown = true">Click here</a>
+            <button id="menu-button" click-outside="closeThis()" outside-if-not="exclusion-zone">Menu Button</button>
+            <div class="spacer">&nbsp;</div>
+            <div id="exclusion-zone">Click outsides will be ignored in here</div>
+            <div class="spacer">&nbsp;</div>
+            <li id="dropdown-menu" click-outside="showDropdown = false" outside-if-not="exclusion-zone">
+                <a href="#" ng-click="showDropdown = true">Show menu</a>
                 <div ng-show="showDropdown">
                     <ul id="submenu">
-                        <li><a href="/this/link/no/worky">Doesn't work</a></li>
-                        <li><a href="/blah#!/this/does">But only if you're already on /blah#!</a></li>
+                        <li><a href="#link1">Menu Item 1</a></li>
+                        <li><a href="#link2">Menu Item 2</a></li>
                     </ul>
                 </div>
             </li>
+            <div class="spacer">&nbsp;</div>
+            <div>{{feedback}}</div>
         </div>
     </div>
 
