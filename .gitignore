@@ -29,6 +29,7 @@ _notes
 /*.lnk
 /bower_components
 /node_modules
+npm-debug.log
 
 # Brackets IDE
 .ftppass
