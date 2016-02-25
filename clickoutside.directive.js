@@ -12,8 +12,7 @@
             restrict: 'A',
             link: function($scope, elem, attr) {
                 var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
-                    fn,
-                    event;
+                    fn;
 
                 // add the elements id so it is not counted in the click listening
                 if (attr.id !== undefined) {
@@ -26,8 +25,6 @@
                     if (angular.element(elem).hasClass("ng-hide")) {
                         return;
                     }
-                    
-                    console.log('passed the hide test');
 
                     var i = 0,
                         element;
@@ -36,8 +33,6 @@
                     if (!e || !e.target) {
                         return;
                     }
-                    
-                    console.log('passed the event check');
 
                     // loop through the available elements, looking for classes in the class list that might match and so will eat
                     for (element = e.target; element; element = element.parentNode) {
@@ -49,13 +44,12 @@
                         if (classNames && classNames.baseVal !== undefined) {
                             classNames = classNames.baseVal;
                         }
-                        
-                        console.log('about to check');
 
                         // loop through the elements id's and classnames looking for exceptions
                         for (i = 0; i < l; i++) {
                             // check for id's or classes, but only if they exist in the first place
-                            if ((id !== undefined && id === classList[i]) || (classNames && classNames === classList[i])) {
+                            if ((id !== undefined && id.indexOf(classList[i]) > -1) || (classNames && classNames.indexOf(classList[i]) > -1)) {
+                                // if ((id !== undefined && id === classList[i]) || (classNames && classNames === classList[i])) {
                                 // now let's exit out as it is an element that has been defined as being ignored for clicking outside
                                 return;
                             }
@@ -69,17 +63,23 @@
                     });
                 }
 
-                // detect if touch device and listen to touchstart instead of click
-                event = (_hasTouch()) ? "touchstart" : "click";
+                // if the devices has a touchscreen, listen for this event
+                if (_hasTouch()) {
+                    $document.on('touchstart', eventHandler);
+                }
 
-                // listen for click or touchstart depending on the device and handle the event
-                $document.on(event, eventHandler);
+                // still listen for the click event even if there is touch to cater for touchscreen laptops
+                $document.on('click', eventHandler);
 
-                // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
+                // when the scope is destroyed, clean up the documents event handlers as we don't want it hanging around
                 $scope.$on('$destroy', function() {
-                    $document.off(event, eventHandler);
+                    if (_hasTouch()) {
+                        $document.off('touchstart', eventHandler);
+                    }
+
+                    $document.off('click', eventHandler);
                 });
-                
+
                 // private function to attempt to figure out if we are on a touch device
                 function _hasTouch() {
                     // works on most browsers, IE10/11 and Surface

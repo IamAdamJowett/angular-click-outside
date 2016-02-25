@@ -10,6 +10,7 @@
         
         function closeThis() {
             console.log('clicked outside');
+            $scope.showDropdown = false;
         }
     }
 })();
