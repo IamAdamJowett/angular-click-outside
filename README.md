@@ -4,10 +4,9 @@ An angular directive to detect a click outside of an elements scope. Great for c
 
 ###Recent changes
 
-- Added support for SVG elements thanks to @holm
-- Removed isolated scope as per @elado suggestion so it can be added to element already calling for isolated scope
-- Now deregistering document click listener when routing away from within the callback passed to the directive
-- Added in-code documentation, and removed the check for id roadblock in loop of elements
+- Thanks to @Anatejms for suggestion to delay link to allow for dynamically created id's
+- Absolute check on class and id names instead of indexOf to fix issues where parts of click-outside names were found in other classes
+- Added fix to cater for devices with both touch and mouse
 
 ###Installation
 
