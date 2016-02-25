@@ -26,6 +26,8 @@
                     if (angular.element(elem).hasClass("ng-hide")) {
                         return;
                     }
+                    
+                    console.log('passed the hide test');
 
                     var i = 0,
                         element;
@@ -34,6 +36,8 @@
                     if (!e || !e.target) {
                         return;
                     }
+                    
+                    console.log('passed the event check');
 
                     // loop through the available elements, looking for classes in the class list that might match and so will eat
                     for (element = e.target; element; element = element.parentNode) {
@@ -41,10 +45,12 @@
                             classNames = element.className,
                             l = classList.length;
 
-                        // Unwrap SVGAnimatedString
+                        // Unwrap SVGAnimatedString classes
                         if (classNames && classNames.baseVal !== undefined) {
                             classNames = classNames.baseVal;
                         }
+                        
+                        console.log('about to check');
 
                         // loop through the elements id's and classnames looking for exceptions
                         for (i = 0; i < l; i++) {
@@ -71,7 +77,7 @@
 
                 // when the scope is destroyed, clean up the documents click handler as we don't want it hanging around
                 $scope.$on('$destroy', function() {
-                    $document.off('click', eventHandler);
+                    $document.off(event, eventHandler);
                 });
                 
                 // private function to attempt to figure out if we are on a touch device
