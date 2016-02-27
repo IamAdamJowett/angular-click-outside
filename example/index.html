@@ -13,15 +13,13 @@
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <li id="dropdown-menu" click-outside="closeThis()" outside-if-not="exclusion-zone, menu-button">
-                <a href="#" ng-click="showDropdown = true">Show menu</a>
-                <div ng-show="showDropdown">
-                    <ul id="submenu">
-                        <li><a href="#link1">Menu Item 1</a></li>
-                        <li><a href="#link2">Menu Item 2</a></li>
-                    </ul>
-                </div>
-            </li>
+            <ul id="dropdown-menu" click-outside="closeThis()" outside-if-not="exclusion-zone, menu-button">
+                <li><a href="#" ng-click="showDropdown = true">Drop down menu</a></li>
+                <ul id="sub-menu" ng-show="showDropdown">
+                    <li><a href="#link1">Menu Item 1</a></li>
+                    <li><a href="#link2">Menu Item 2</a></li>
+                </ul>
+            </ul>
             <div class="spacer">&nbsp;</div>
             <div class="zones" id="exclusion-zone">Click outsides will be ignored in here</div>
             <div class="spacer">&nbsp;</div>
