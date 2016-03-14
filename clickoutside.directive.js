@@ -50,8 +50,10 @@
 
                             // loop through the elements id's and classnames looking for exceptions
                             for (i = 0; i < l; i++) {
+                                //prepare regex for class word matching
+                                var r = new RegExp('\\b' + classList[i] + '\\b');
                                 // check for exact matches on id's or classes, but only if they exist in the first place
-                                if ((id !== undefined && id === classList[i]) || (classNames && classNames === classList[i])) {
+                                if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
                                     // now let's exit out as it is an element that has been defined as being ignored for clicking outside
                                     return;
                                 }
