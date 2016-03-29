@@ -37,6 +37,14 @@
                             return;
                         }
 
+                        // prevent closing if the click is inside of the element
+                        var isClickedElementChildOfElement = elem
+                                .find(event.target)
+                                .length > 0;
+                        if (isClickedElementChildOfElement) {
+                            return;
+                        }
+
                         // loop through the available elements, looking for classes in the class list that might match and so will eat
                         for (element = e.target; element; element = element.parentNode) {
                             var id = element.id,
