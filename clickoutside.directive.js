@@ -39,7 +39,7 @@
 
                         // prevent closing if the click is inside of the element
                         var isClickedElementChildOfElement = elem
-                                .find(event.target)
+                                .find(e.target)
                                 .length > 0;
                         if (isClickedElementChildOfElement) {
                             return;
