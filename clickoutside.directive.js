@@ -51,7 +51,7 @@
                             // loop through the elements id's and classnames looking for exceptions
                             for (i = 0; i < l; i++) {
                                 // If there are multiple classes on element, check each of them
-                                if (classNames.indexOf(" ") > 0) {
+                                if (classNames && classNames.indexOf(" ") > 0) {
                                     var classNamesArr = classNames.split(" ");
                                     for (e = 0; e < classNamesArr.length; e++) {
                                         // exit out if _isAllowed returns true, as it is an element that has been defined as being ignored for clicking outside
