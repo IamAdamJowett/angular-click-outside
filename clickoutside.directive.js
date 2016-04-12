@@ -14,7 +14,7 @@
                 
                 // postpone linking to next digest to allow for unique id generation
                 $timeout(function() {
-                    var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
+                    var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(/, /g, ',').split(',') : [],
                         fn;
 
                     // add the elements id so it is not counted in the click listening
@@ -50,10 +50,16 @@
 
                             // loop through the elements id's and classnames looking for exceptions
                             for (i = 0; i < l; i++) {
-                                // check for exact matches on id's or classes, but only if they exist in the first place
-                                if ((id !== undefined && id === classList[i]) || (classNames && classNames === classList[i])) {
-                                    // now let's exit out as it is an element that has been defined as being ignored for clicking outside
-                                    return;
+                                // If there are multiple classes on element, check each of them
+                                if (classNames && classNames.indexOf(" ") > 0) {
+                                    var classNamesArr = classNames.split(" ");
+                                    for (e = 0; e < classNamesArr.length; e++) {
+                                        // exit out if _isAllowed returns true, as it is an element that has been defined as being ignored for clicking outside
+                                        if (_isAllowed(id, classNamesArr[e], classList[i])) return;
+                                    }
+                                } else {
+                                    // exit out if _isAllowed returns true, as it is an element that has been defined as being ignored for clicking outside
+                                    if (_isAllowed(id, classNames, classList[i])) return;
                                 }
                             }
                         }
@@ -81,6 +87,14 @@
 
                         $document.off('click', eventHandler);
                     });
+
+                    // private function that checks for exact matches on id's or classes, but only if they exist in the first place
+                    function _isAllowed(id, className, allowedIdOrClassName) {                        
+                        if ((id !== undefined && id === allowedIdOrClassName) || (className && className === allowedIdOrClassName)) {
+                            return true;
+                        }
+                        return false;
+                    }
 
                     // private function to attempt to figure out if we are on a touch device
                     function _hasTouch() {
