@@ -14,7 +14,7 @@
                 
                 // postpone linking to next digest to allow for unique id generation
                 $timeout(function() {
-                    var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
+                    var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
                         fn;
 
                     // add the elements id so it is not counted in the click listening
