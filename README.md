@@ -4,9 +4,12 @@ An angular directive to detect a click outside of an elements scope. Great for c
 
 ###Recent changes
 
-- Thanks to @Anatejms for suggestion to delay link to allow for dynamically created id's
-- Absolute check on class and id names instead of indexOf to fix issues where parts of click-outside names were found in other classes
-- Added fix to cater for devices with both touch and mouse
+- Thanks to @mariomc for the fix if there is more than two classes to exclude and to @bramvandenbussche and @lamigue for also spotting it
+- Stopped running through class checking if element clicked on has no classes or id's to improve performance
+- Updated README
+- Published latest repo with main.js to npm to allow webpack usage
+- Added file input type to example to show functionality
+- Updated readme detailing excluding element that directive is on
 
 ###Installation
 
