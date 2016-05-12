@@ -13,7 +13,7 @@
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <ul id="dropdown-menu" click-outside="closeThis()" outside-if-not="exclusion-zone, menu-button">
+            <ul id="dropdown-menu" click-outside="closeThis()" outside-if-not="another-class, menu-button, file-input">
                 <li><a href="#" ng-click="showDropdown = true">Drop down menu</a></li>
                 <ul id="sub-menu" ng-show="showDropdown">
                     <li><a href="#link1">Menu Item 1</a></li>
@@ -21,11 +21,13 @@
                 </ul>
             </ul>
             <div class="spacer">&nbsp;</div>
-            <div class="zones" id="exclusion-zone another-class">Click outsides will be ignored in here</div>
+            <div class="zones another-class" id="exclusion-zone">Click outsides will be ignored in here</div>
             <div class="spacer">&nbsp;</div>
             <button id="menu-button">Button is excluded as well</button>
             <div class="spacer">&nbsp;</div>
             <div class="zones" id="non-exclusion-zone">This is not excluded and will register as a click outside of the menu</div>
+            <div class="spacer">&nbsp;</div>
+            <div class="file-input"><input type="file" name="filebrowser">This file input should also be excluded</input></div>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-/*global angular*/
+/*global angular, navigator*/
 
 (function() {
     'use strict';
@@ -16,21 +16,24 @@
                 $timeout(function() {
                     var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
                         fn;
-
+                        
                     // add the elements id so it is not counted in the click listening
                     if (attr.id !== undefined) {
                         classList.push(attr.id);
                     }
 
                     function eventHandler(e) {
+                        var i,
+                            element,
+                            r,
+                            id,
+                            classNames,
+                            l;
 
                         // check if our element already hidden and abort if so
                         if (angular.element(elem).hasClass("ng-hide")) {
                             return;
                         }
-
-                        var i = 0,
-                            element;
 
                         // if there is no click target, no point going on
                         if (!e || !e.target) {
@@ -39,23 +42,32 @@
 
                         // loop through the available elements, looking for classes in the class list that might match and so will eat
                         for (element = e.target; element; element = element.parentNode) {
-                            var id = element.id,
-                                classNames = element.className,
-                                l = classList.length;
+                            id = element.id,
+                            classNames = element.className,
+                            l = classList.length;
 
                             // Unwrap SVGAnimatedString classes
                             if (classNames && classNames.baseVal !== undefined) {
                                 classNames = classNames.baseVal;
                             }
-
-                            // loop through the elements id's and classnames looking for exceptions
-                            for (i = 0; i < l; i++) {
-                                //prepare regex for class word matching
-                                var r = new RegExp('\\b' + classList[i] + '\\b');
-                                // check for exact matches on id's or classes, but only if they exist in the first place
-                                if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
-                                    // now let's exit out as it is an element that has been defined as being ignored for clicking outside
-                                    return;
+                            
+                            // if there are no class names on the element clicked, skip the check
+                            if (classNames || id) {
+                                
+                                 console.log('classNames: ' + classNames);
+                                 
+                                // loop through the elements id's and classnames looking for exceptions
+                                for (i = 0; i < l; i++) {
+                                    //prepare regex for class word matching
+                                    r = new RegExp('\\b' + classList[i] + '\\b');
+                                    
+                                    console.log('classList: ' + classList[i]);
+                                    
+                                    // check for exact matches on id's or classes, but only if they exist in the first place
+                                    if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
+                                        // now let's exit out as it is an element that has been defined as being ignored for clicking outside
+                                        return;
+                                    }
                                 }
                             }
                         }
