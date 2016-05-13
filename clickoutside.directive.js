@@ -11,12 +11,12 @@
         return {
             restrict: 'A',
             link: function($scope, elem, attr) {
-                
+
                 // postpone linking to next digest to allow for unique id generation
                 $timeout(function() {
                     var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
                         fn;
-                        
+
                     // add the elements id so it is not counted in the click listening
                     if (attr.id !== undefined) {
                         classList.push(attr.id);
@@ -50,19 +50,19 @@
                             if (classNames && classNames.baseVal !== undefined) {
                                 classNames = classNames.baseVal;
                             }
-                            
+
                             // if there are no class names on the element clicked, skip the check
                             if (classNames || id) {
-                                
-                                 console.log('classNames: ' + classNames);
-                                 
+
+                                // console.log('classNames: ' + classNames);
+
                                 // loop through the elements id's and classnames looking for exceptions
                                 for (i = 0; i < l; i++) {
                                     //prepare regex for class word matching
                                     r = new RegExp('\\b' + classList[i] + '\\b');
-                                    
-                                    console.log('classList: ' + classList[i]);
-                                    
+
+                                  //  console.log('classList: ' + classList[i]);
+
                                     // check for exact matches on id's or classes, but only if they exist in the first place
                                     if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
                                         // now let's exit out as it is an element that has been defined as being ignored for clicking outside
