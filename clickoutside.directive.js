@@ -73,7 +73,7 @@
                         }
 
                         // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
-                        $scope.$apply(function() {
+                        $timeout(function() {
                             fn = $parse(attr['clickOutside']);
                             fn($scope);
                         });
