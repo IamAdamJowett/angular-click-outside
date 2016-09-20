@@ -13,7 +13,7 @@
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <ul id="dropdown-menu" click-outside="closeThis()" outside-if-not="another-class, menu-button, file-input">
+            <ul click-outside="closeThis()" outside-if-not="another-class, menu-button, file-input">
                 <li><a href="#" ng-click="showDropdown = true">Drop down menu</a></li>
                 <ul id="sub-menu" ng-show="showDropdown">
                     <li><a href="#link1">Menu Item 1</a></li>

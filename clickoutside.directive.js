@@ -5,8 +5,19 @@
 
     angular
         .module('angular-click-outside', [])
-        .directive('clickOutside', ['$document', '$parse', '$timeout', clickOutside]);
-
+        .directive('clickOutside', [
+            '$document', '$parse', '$timeout',
+            clickOutside
+        ]);
+    
+    /**
+     * @ngdoc directive
+     * @name angular-click-outside.directive:clickOutside
+     * @description Directive to add click outside capabilities to DOM elements
+     * @requires $document
+     * @requires $parse
+     * @requires $timeout
+     **/
     function clickOutside($document, $parse, $timeout) {
         return {
             restrict: 'A',
@@ -16,11 +27,6 @@
                 $timeout(function() {
                     var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
                         fn;
-
-                    // add the elements id so it is not counted in the click listening
-                    if (attr.id !== undefined) {
-                        classList.push(attr.id);
-                    }
 
                     function eventHandler(e) {
                         var i,
@@ -42,10 +48,12 @@
 
                         // loop through the available elements, looking for classes in the class list that might match and so will eat
                         for (element = e.target; element; element = element.parentNode) {
+                            // check if the element is the same element the directive is attached to and exit if so (props @CosticaPuntaru)
                             if (element === elem[0]) {
                                 return;
                             }
                             
+                            // now we have done the initial checks, start gathering id's and classes
                             id = element.id,
                             classNames = element.className,
                             l = classList.length;
@@ -58,14 +66,10 @@
                             // if there are no class names on the element clicked, skip the check
                             if (classNames || id) {
 
-                                // console.log('classNames: ' + classNames);
-
                                 // loop through the elements id's and classnames looking for exceptions
                                 for (i = 0; i < l; i++) {
                                     //prepare regex for class word matching
                                     r = new RegExp('\\b' + classList[i] + '\\b');
-
-                                  //  console.log('classList: ' + classList[i]);
 
                                     // check for exact matches on id's or classes, but only if they exist in the first place
                                     if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
@@ -100,7 +104,10 @@
                         $document.off('click', eventHandler);
                     });
 
-                    // private function to attempt to figure out if we are on a touch device
+                    /**
+                     * @description Private function to attempt to figure out if we are on a touch device
+                     * @private
+                     **/
                     function _hasTouch() {
                         // works on most browsers, IE10/11 and Surface
                         return 'ontouchstart' in window || navigator.maxTouchPoints;
