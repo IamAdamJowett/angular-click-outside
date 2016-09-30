@@ -13,7 +13,8 @@
 <body>
     <div ng-view>
         <div ng-controller="AppController">
-            <ul click-outside="closeThis()" outside-if-not="another-class, menu-button, file-input">
+            <p><strong>Open this dropdown menu which has some click outside exclusions applied</strong></p>
+            <ul click-outside="closeThis()" outside-if-not="another-class, menu-button, file-input, my-select, option-1">
                 <li><a href="#" ng-click="showDropdown = true">Drop down menu</a></li>
                 <ul id="sub-menu" ng-show="showDropdown">
                     <li><a href="#link1">Menu Item 1</a></li>
@@ -21,11 +22,31 @@
                 </ul>
             </ul>
             <div class="spacer">&nbsp;</div>
+            <hr />
+            <div class="spacer">&nbsp;</div>
+            <div>
+              <form name="my-form" id="my-form">
+                <label for="my-select">Clicking this select should not close the menu:</label>
+                <select name="my-select" id="my-select"
+                  ng-options="option.name for option in data.availableOptions track by option.id"
+                  ng-model="data.selectedOption"></select>
+              </form>
+            </div>
+            <div class="spacer">&nbsp;</div>
+            <div>
+                <form name="my-form-2">
+                    <label for="ngvalueselect">The dropdown menu will close if you select any option other than Option B</label>
+                    <select size="6" name="ngvalueselect" ng-model="data.model" multiple>
+                      <option ng-repeat="option in data.availableOptions" ng-value="option.value" class="option-{{$index}}">{{option.name}}</option>
+                    </select>
+                </form>
+            </div>
+            <div class="spacer">&nbsp;</div>
             <div class="zones another-class" id="exclusion-zone">Click outsides will be ignored in here</div>
             <div class="spacer">&nbsp;</div>
             <button id="menu-button">Button is excluded as well</button>
             <div class="spacer">&nbsp;</div>
-            <div class="zones" id="non-exclusion-zone">This is not excluded and will register as a click outside of the menu</div>
+            <div class="zones" id="non-exclusion-zone">This is not excluded and will register as a click outside of the menu and so the drop down menu will close</div>
             <div class="spacer">&nbsp;</div>
             <div class="file-input"><input type="file" name="filebrowser">This file input should also be excluded</input></div>
         </div>

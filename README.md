@@ -11,6 +11,13 @@ An angular directive to detect a click outside of an elements scope. Great for c
 - Updated example to no longer have id on drop down menu
 - Updated example styles
 - Updated readme
+- Added selects to example
+
+###Roadmap
+
+- Addition of outside-if attribute. Ability to restrict click outside registering to defined elements (opposite of outside-if-not) rathat than anywhere outside an element
+- Look into the worth of converting directive to Angular 1 component
+- Conversion of directive to Angular 2 component
 
 ###Installation
 
