@@ -1,6 +1,6 @@
 {
   "name": "@iamadamjowett/angular-click-outside",
-  "version": "2.9.2",
+  "version": "2.9.3",
   "main": "clickoutside.directive.js",
   "author": {
     "name": "Adam Jowett",
