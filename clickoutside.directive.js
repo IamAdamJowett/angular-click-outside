@@ -83,7 +83,7 @@
                         // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
                         $timeout(function() {
                             fn = $parse(attr['clickOutside']);
-                            fn($scope);
+                            fn($scope, { event: e });
                         });
                     }
 
