@@ -4,6 +4,7 @@ An angular directive to detect a click outside of an elements scope. Great for c
 
 ###Recent changes
 
+- Shortened bower description to remove bower warning on install (thanks @jcubic)
 - Thanks to @Lorelei for the pull request to pass the event back in the callback function
 - Thanks to @CosticaPuntaru for the improvement to now allow the directive to no longer need an id on the element for this to work
 - Added basic ngdocs documentation
