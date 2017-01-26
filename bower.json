@@ -6,7 +6,7 @@
     "authors": [
         "IamAdamJowett"
     ],
-    "description": "An angular directive to detect a click outside of an elements scope, great for clicking outside of slide in and drop down menus amongst other things.",
+    "description": "An angular directive to detect a click outside of an elements scope, e.g. clicking outside of slide in menus.",
     "keywords": [
         "angular",
         "click",
