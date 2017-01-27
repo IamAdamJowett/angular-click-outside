@@ -25,7 +25,7 @@
 
                 // postpone linking to next digest to allow for unique id generation
                 $timeout(function() {
-                    var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
+                    var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
                         fn;
 
                     function eventHandler(e) {
