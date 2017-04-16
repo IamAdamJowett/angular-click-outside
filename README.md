@@ -1,8 +1,8 @@
-#angular-click-outside
+# angular-click-outside
 
 An angular directive to detect a click outside of an elements scope. Great for closing dialogues, drawers and off screen menu's etc.
 
-###Recent changes
+### Recent changes
 
 - Shortened bower description to remove bower warning on install (thanks @jcubic)
 - Thanks to @Lorelei for the pull request to pass the event back in the callback function
@@ -10,13 +10,13 @@ An angular directive to detect a click outside of an elements scope. Great for c
 - Added basic ngdocs documentation
 - Removed the addition of the element id to the classes array as now it no longer needs to be checked
 
-###Roadmap
+### Roadmap
 
 - Addition of outside-if attribute. Ability to restrict click outside registering to defined elements (opposite of outside-if-not) rather than anywhere outside an element
 - Look into the worth of converting directive to Angular 1 component
 - Conversion of directive to Angular 2 component
 
-###Installation
+### Installation
 
 There are two easy ways to install the clickoutside directive:
 
@@ -30,15 +30,15 @@ Also be sure to include the module in your app.js file with:
 
     angular.module('yourAppName', ['angular-click-outside'])
     
-####npm
+#### npm
 
     npm install @iamadamjowett/angular-click-outside
 
-####Bower
+#### Bower
 
     bower install angular-click-outside --save
 
-###Usage
+### Usage
 
 The directive will work with either id's or classes, however be wary of using classes as quite often some unwanted elements may have the same class, and so will be excluded/included unintentionally. 
 
@@ -79,7 +79,7 @@ Where `closeThis()` is the function assigned to the scope via the controller suc
         </div>
     </div>
 
-###Adding Exceptions
+### Adding Exceptions
 You can also add exceptions via the `outside-if-not` tag, which executes the callback function, but only if the id's or classes listed aren't clicked.
 
 In this case `closeThis()` will be called only if clicked outside _and_ #my-button wasn't clicked as well (note .my-button also would be an exception). This can be great for things like slide in menus that might have a button outside of the menu scope that triggers it:
