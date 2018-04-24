@@ -89,7 +89,9 @@
 
                     // if the devices has a touchscreen, listen for this event
                     if (_hasTouch()) {
-                        $document.on('touchstart', eventHandler);
+                        $document.on('touchstart', function () {
+                          setTimeout(eventHandler)
+                        });
                     }
 
                     // still listen for the click event even if there is touch to cater for touchscreen laptops
