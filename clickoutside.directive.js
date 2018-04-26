@@ -9,7 +9,7 @@
             '$document', '$parse', '$timeout',
             clickOutside
         ]);
-    
+
     /**
      * @ngdoc directive
      * @name angular-click-outside.directive:clickOutside
@@ -52,7 +52,7 @@
                             if (element === elem[0]) {
                                 return;
                             }
-                            
+
                             // now we have done the initial checks, start gathering id's and classes
                             id = element.id,
                             classNames = element.className,
@@ -72,7 +72,7 @@
                                     r = new RegExp('\\b' + classList[i] + '\\b');
 
                                     // check for exact matches on id's or classes, but only if they exist in the first place
-                                    if ((id !== undefined && id === classList[i]) || (classNames && r.test(classNames))) {
+                                    if ((id !== undefined && r.test(id)) || (classNames && r.test(classNames))) {
                                         // now let's exit out as it is an element that has been defined as being ignored for clicking outside
                                         return;
                                     }
