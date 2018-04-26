@@ -29,19 +29,21 @@ Download the `clickoutside.directive.js` file, and include it in your `index.htm
 ```
 
 Also be sure to include the module in your `app.js` file with:
-
+    
+#### npm
+=======
 ```javascript
 angular.module('yourAppName', ['angular-click-outside'])
 ```
 
-#### npm
-
+#### Bower
+=======
 ```shell
 npm install @iamadamjowett/angular-click-outside
 ```
 
-#### Bower
-
+### Usage
+=======
 ```shell
 bower install angular-click-outside --save
 ```
@@ -96,6 +98,7 @@ function MenuController($scope) {
 ```
 
 ### Adding Exceptions
+
 You can also add exceptions via the `outside-if-not` tag, which executes the callback function, but only if the ID's or classes listed aren't clicked.
 
 In this case `closeThis()` will be called only if clicked outside _and_ `#my-button` wasn't clicked as well (note `.my-button` also would be an exception). This can be great for things like slide in menus that might have a button outside of the menu scope that triggers it:
