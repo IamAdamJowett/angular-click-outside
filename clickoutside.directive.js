@@ -22,9 +22,18 @@
         return {
             restrict: 'A',
             link: function($scope, elem, attr) {
+                let isDestoyed = false;
+
+                $scope.$on('$destroy', function() {
+                  isDestoyed = true;
+                });
 
                 // postpone linking to next digest to allow for unique id generation
                 $timeout(function() {
+                    if (isDestoyed) {
+                        return;
+                    }
+
                     var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
                         fn;
 
