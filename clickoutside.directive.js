@@ -24,9 +24,10 @@
             link: function($scope, elem, attr) {
 
                 // postpone linking to next digest to allow for unique id generation
-                $timeout(function() {
+                var timer = $timeout(function() {
                     var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.split(/[ ,]+/) : [],
-                        fn;
+                        fn,
+                        timer;
 
                     function eventHandler(e) {
                         var i,
@@ -81,7 +82,7 @@
                         }
 
                         // if we have got this far, then we are good to go with processing the command passed in via the click-outside attribute
-                        $timeout(function() {
+                        timer = $timeout(function() {
                             fn = $parse(attr['clickOutside']);
                             fn($scope, { event: e });
                         });
@@ -99,6 +100,8 @@
 
                     // when the scope is destroyed, clean up the documents event handlers as we don't want it hanging around
                     $scope.$on('$destroy', function() {
+                        if(timer) $timeout.cancel(timer);
+
                         if (_hasTouch()) {
                             $document.off('touchstart', eventHandler);
                         }
@@ -114,6 +117,10 @@
                         // works on most browsers, IE10/11 and Surface
                         return 'ontouchstart' in window || navigator.maxTouchPoints;
                     };
+                });
+
+                $scope.$on('$destroy', function() {
+                    if(timer) $timeout.cancel(timer);
                 });
             }
         };
