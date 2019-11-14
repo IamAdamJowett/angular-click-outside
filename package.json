@@ -1,5 +1,5 @@
 {
-  "name": "iamadamjowett/angular-click-outside",
+  "name": "@iamadamjowett/angular-click-outside",
   "version": "2.11.0",
   "main": "clickoutside.directive.js",
   "author": {
